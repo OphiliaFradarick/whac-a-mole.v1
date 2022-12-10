@@ -52,17 +52,20 @@ function setup() {
 
 
 function draw() {
-  rectMode(CENTER);
+//   rectMode(CENTER);
   background("olive");
   
   drawSprites();
+  //spawnMoles()
   
   if(gamestate=="start"){
 	title.visible = true
   }
   if(gamestate=="play"){
 	playState()
-	spawnMoles()
+	spawnMoles();
+	console.log("play state is working")
+	
   }
   text(mouseX + "," + mouseY, mouseX, mouseY);
 }
@@ -70,20 +73,66 @@ function draw() {
 
 
 function playState(){
+
+	gamestate = "play";
 	startButton.hide()
 	bg.visible = true
 	
 }
 
 function spawnMoles(){
-	//if(frameCount % 10 === 0){
+	if(frameCount % 60 === 0){
 		mole = createSprite(160,115,70,70)
-		mole.size = 2
-	//	mole.x = random(holeX)
-	//	mole.y = random(holeY)
+		mole.scale = 0.23
+		console.log(World.frameCount)
+		// mole.x = random(holeX)
+		// mole.y = random(holeY)
+
+		var randomPosition = Math.round(random(1,9))
+		switch(randomPosition){
+         case 1: mole.x = 160;
+		         mole.y = 115;
+		 break;
+
+		 case 2: mole.x = 400;
+		 mole.y = 115;
+         break;
+
+		 case 3: mole.x = 645;
+		 mole.y = 115;
+         break;
+
+		 case 4: mole.x = 160;
+		 mole.y = 360;
+         break;
+
+		 case 5: mole.x = 400;
+		 mole.y = 360;
+         break;
+
+		 case 6: mole.x = 640;
+		 mole.y = 360;
+		 break;
+
+		 case 7: mole.x = 160;
+		 mole.y = 600;
+		 break;
+
+		 case 8: mole.x = 400;
+		 mole.y = 600;
+		 break;
+
+		 case 9: mole.x = 640;
+		 mole.y = 600;
+		 break;
+
+		 default: break;
+
+		}
+
 		mole.addImage(moleImage)
 		bg.depth = mole.depth
 		mole.depth = mole.depth + 1
 		
-	//}
+	}
 }
